@@ -61,9 +61,17 @@ const MainForm = () => {
         .catch((err) => {
           console.log(err);
         });
-      console.log("use", formik.values.wheels);
     }
-  }, [formik.values.wheels]);
+    if (formik.values.vehicleType != "") {
+      var url = `http://localhost:5000/vehicle/${formik.values.vehicleType}`
+    axios
+      .get(url)
+      .then((res) => setVehicleModels(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  }, [formik.values.wheels, formik.values.vehicleType]);
 
   console.log('type', vehicleTypes)
 
@@ -90,7 +98,7 @@ const MainForm = () => {
       case 3:
         return <VehicleTypeInput options={vehicleTypes} formik={formik} />;
       case 4:
-        return <ModelInput formik={formik} />;
+        return <ModelInput options={vehicleModels} formik={formik} />;
       case 5:
         return <DateRangePicker formik={formik} />;
       default:

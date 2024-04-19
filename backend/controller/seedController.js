@@ -30,6 +30,21 @@ async function seedData(req, res) {
       { type: "Sports", model: "Bajaj Pulsar RS 200" },
       { type: "Sports", model: "Suzuki Gixxer SF" },
       { type: "Sports", model: "BMW G310 RR" },
+
+      { type: "Hatchback", model: "Tata Altroz" },
+      { type: "Hatchback", model: "Maruti Suzuki Baleno" },
+      { type: "Hatchback", model: "Hyundai Grand i10 Nios" },
+      { type: "Hatchback", model: "Tata Tiago" },
+
+      { type: "SUV", model: "Mahindra Scorpio" },
+      { type: "SUV", model: "Hyundai Creta" },
+      { type: "SUV", model: "Mahindra Bolero" },
+      { type: "SUV", model: "Maruti Brezza" },
+
+      { type: "Sedan", model: "Hyundai Verna" },
+      { type: "Sedan", model: "Honda Amaze" },
+      { type: "Sedan", model: "Škoda Slavia" },
+      { type: "Sedan", model: "Tata Tigor" },
     ]);
 
 
