@@ -5,7 +5,7 @@ const carCtrl = require("./controller/carController");
 const bikeCtrl = require("./controller/bikeController");
 const vehicleCtrl = require("./controller/vehicleController");
 const seedCtrl = require("./controller/seedController");
-const rentCtrl = require("./controller/rentController");
+const userCtrl = require("./controller/userController");
 const app = express();
 
 app.use(bodyParser.json());
@@ -14,12 +14,13 @@ app.use(cors())
 require("./models/index");
 
 // rent router
-app.get('/rents/add', rentCtrl.addRent);
+app.post('/user/rents', userCtrl.addRent);
+app.get('/user/list', userCtrl.userList);
 
 // car router
 app.get('/cars', carCtrl.carList);
 
-// // bike router
+// bike router
 app.get('/bikes', bikeCtrl.bikeList);
 
 // model router

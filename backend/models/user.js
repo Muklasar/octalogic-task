@@ -12,6 +12,27 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       // allowNull defaults to true
     },
+    wheels: {
+      type: DataTypes.STRING,
+      // allowNull defaults to true
+    },
+    vehicleType: {
+      type: DataTypes.STRING,
+      // allowNull defaults to true
+    },
+    model: {
+      type: DataTypes.STRING,
+      // allowNull defaults to true
+    },
+    startDate: {
+      type: DataTypes.STRING,
+      // allowNull defaults to true
+    },
+    endDate: {
+      type: DataTypes.STRING,
+      // allowNull defaults to true
+    },
+
   },
   {
     // Other model options go here
