@@ -20,6 +20,7 @@ db.sequelize = sequelize
 db.user = require('./user')(sequelize, DataTypes)
 db.car = require('./car')(sequelize, DataTypes)
 db.bike = require('./bike')(sequelize, DataTypes)
+db.vehicleModel = require('./vehicleModel')(sequelize, DataTypes)
 db.sequelize.sync()
 
 module.exports = db
