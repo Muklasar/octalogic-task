@@ -3,11 +3,14 @@ var bodyParser = require("body-parser");
 const carCtrl = require("./controller/carController");
 const bikeCtrl = require("./controller/bikeController");
 const seedCtrl = require("./controller/seedController");
+const rentCtrl = require("./controller/rentController");
 const app = express();
 
 app.use(bodyParser.json());
 require("./models/index");
 
+// rent router
+app.get('/rents/add', rentCtrl.addRent);
 
 // car router
 app.get('/cars', carCtrl.carList);
