@@ -1,32 +1,52 @@
-// // DateRangePicker.js
-// import React from 'react';
-// import { TextField } from '@mui/material';
-// import AdapterDateFns from '@mui/lab/AdapterDateFns';
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import { DateRangePicker as MuiDateRangePicker } from '@mui/lab';
+import * as React from "react";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import dayjs from 'dayjs'; // Import Day.js
 
-// const DateRangePicker = ({ formik }) => {
-//   const { values, setFieldValue } = formik;
+export default function BasicDateRangePicker({ formik }) {
+  const { values, setFieldValue } = formik;
 
-//   return (
-//     <LocalizationProvider dateAdapter={AdapterDateFns}>
-//       <MuiDateRangePicker
-//         startText="Start Date"
-//         endText="End Date"
-//         value={[values.startDate, values.endDate]}
-//         onChange={(newValue) => {
-//           setFieldValue('startDate', newValue[0]);
-//           setFieldValue('endDate', newValue[1]);
-//         }}
-//         renderInput={(startProps, endProps) => (
-//           <>
-//             <TextField {...startProps} variant="standard" margin="normal" />
-//             <TextField {...endProps} variant="standard" margin="normal" />
-//           </>
-//         )}
-//       />
-//     </LocalizationProvider>
-//   );
-// };
+  const handleStartDateChange = (date) => {
+    if (date) { // Check if date is not null or undefined
+      const isValidDate = dayjs(date).isValid(); // Validate the date
+      if (isValidDate) {
+        setFieldValue("startDate", dayjs(date)); // Set the value in Formik if it's a valid date
+      }
+    }
+  };
 
-// export default DateRangePicker;
+  const handleEndDateChange = (date) => {
+    if (date) { // Check if date is not null or undefined
+      const isValidDate = dayjs(date).isValid(); // Validate the date
+      if (isValidDate) {
+        setFieldValue("endDate", dayjs(date)); // Set the value in Formik if it's a valid date
+      }
+    }
+  };
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={["DateRangePicker"]}>
+        <div>
+          <p>Start Date</p>
+          <DatePicker
+            name="startDate"
+            label="Start Date"
+            value={values.startDate || null} // Ensure value is null or a Date object
+            onChange={handleStartDateChange}
+          />
+        </div>
+        <div>
+          <p>End Date</p>
+          <DatePicker
+            name="endDate"
+            label="End Date"
+            value={values.endDate || null} // Ensure value is null or a Date object
+            onChange={handleEndDateChange}
+          />
+        </div>
+      </DemoContainer>
+    </LocalizationProvider>
+  );
+}
