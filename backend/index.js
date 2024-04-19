@@ -1,5 +1,6 @@
 const express = require("express");
 var bodyParser = require("body-parser");
+var cors = require('cors')
 const carCtrl = require("./controller/carController");
 const bikeCtrl = require("./controller/bikeController");
 const seedCtrl = require("./controller/seedController");
@@ -7,6 +8,8 @@ const rentCtrl = require("./controller/rentController");
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors())
+
 require("./models/index");
 
 // rent router
