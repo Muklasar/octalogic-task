@@ -9,7 +9,6 @@ import VehicleTypeInput from "../components/VehicleTypeInput";
 import ModelInput from "../components/ModelInput";
 import DateRangePicker from "../components/DateRangePicker";
 import { Button, Container } from "@mui/material";
-import SuccessPage from "./SuccessPage";
 
 const MainForm = () => {
   const [step, setStep] = useState(1);
