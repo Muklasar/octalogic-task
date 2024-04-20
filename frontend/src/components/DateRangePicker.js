@@ -35,6 +35,7 @@ export default function BasicDateRangePicker({ formik }) {
             label="Start Date"
             value={values.startDate || null} // Ensure value is null or a Date object
             onChange={handleStartDateChange}
+            sx={{width: "100%"}}
           />
         </div>
         <div>
@@ -44,6 +45,7 @@ export default function BasicDateRangePicker({ formik }) {
             label="End Date"
             value={values.endDate || null} // Ensure value is null or a Date object
             onChange={handleEndDateChange}
+            sx={{width: "100%"}}
           />
         </div>
       </DemoContainer>

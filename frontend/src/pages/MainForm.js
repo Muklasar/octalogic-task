@@ -8,6 +8,8 @@ import WheelsInput from "../components/WheelsInput";
 import VehicleTypeInput from "../components/VehicleTypeInput";
 import ModelInput from "../components/ModelInput";
 import DateRangePicker from "../components/DateRangePicker";
+import { Button, Container } from "@mui/material";
+import SuccessPage from "./SuccessPage";
 
 const MainForm = () => {
   const [step, setStep] = useState(1);
@@ -46,7 +48,12 @@ const MainForm = () => {
     },
     validationSchema: validationSchemas[step - 1],
     onSubmit: (values, { setSubmitting }) => {
-      console.log(values); // Send data to backend API for booking
+      console.log("submit", values);
+
+      axios
+        .post("http://localhost:5000/user/rents", values)
+        .then((res) => setStep(6))
+        .catch((err) => console.log(err));
       setSubmitting(false);
     },
   });
@@ -54,7 +61,10 @@ const MainForm = () => {
 
   useEffect(() => {
     if (formik.values.wheels != "") {
-        var url = formik.values.wheels > 2 ? 'http://localhost:5000/cars' : 'http://localhost:5000/bikes' 
+      var url =
+        formik.values.wheels > 2
+          ? "http://localhost:5000/cars"
+          : "http://localhost:5000/bikes";
       axios
         .get(url)
         .then((res) => setVehicleTypes(res.data))
@@ -63,17 +73,17 @@ const MainForm = () => {
         });
     }
     if (formik.values.vehicleType != "") {
-      var url = `http://localhost:5000/vehicle/${formik.values.vehicleType}`
-    axios
-      .get(url)
-      .then((res) => setVehicleModels(res.data))
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+      var url = `http://localhost:5000/vehicle/${formik.values.vehicleType}`;
+      axios
+        .get(url)
+        .then((res) => setVehicleModels(res.data))
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [formik.values.wheels, formik.values.vehicleType]);
 
-  console.log('type', vehicleTypes)
+  console.log("type", vehicleTypes);
 
   const handleNextStep = () => {
     formik.validateForm().then((errors) => {
@@ -101,6 +111,8 @@ const MainForm = () => {
         return <ModelInput options={vehicleModels} formik={formik} />;
       case 5:
         return <DateRangePicker formik={formik} />;
+      case 6:
+        return <h1 style={{textAlign: "center"}}>Successfully Booked</h1>;
       default:
         return null;
     }
@@ -115,25 +127,29 @@ const MainForm = () => {
         </button>
       )} */}
       {step < 5 && (
-        <button
+        <Button
+          variant="contained"
           type="button"
           onClick={handleNextStep}
           disabled={
             formik.isSubmitting || Object.keys(formik.errors).length > 0
           }
+          sx={{ width: "100%", marginTop: "20px", }}
         >
           Next
-        </button>
+        </Button>
       )}
       {step === 5 && (
-        <button
+        <Button
+          variant="contained"
           type="submit"
           disabled={
             formik.isSubmitting || Object.keys(formik.errors).length > 0
           }
+          sx={{ marginTop: "20px", width: "100%" }}
         >
           Submit
-        </button>
+        </Button>
       )}
     </form>
   );
